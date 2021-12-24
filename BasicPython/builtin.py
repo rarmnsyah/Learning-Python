@@ -51,3 +51,5 @@ print(len(testLengthSet)) #3
 # 10. eval(expression)
 # Fungsi yang mengembalikan nilai berdasarkan operasi yang ditulis dengan string
 print(eval('4 / 12 + 1')) #1.333
+
+# testing
