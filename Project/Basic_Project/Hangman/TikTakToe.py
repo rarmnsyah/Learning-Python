@@ -5,6 +5,7 @@ player = {
     2 : 'X'
 }
 
+# testing
 def printField():
     for i in field:
         print('|', end='')
