@@ -1,6 +1,6 @@
 import random
 
-limitNumber = int(input("Set your limit number: "))
+# limitNumber = int(input("Set your limit number: "))
 
 def guessNumber(x):
     randomNumber = random.randint(1,x)
@@ -18,15 +18,15 @@ def guessNumber(x):
     print("Yeay Congrats, u deserve it!")
 
 def guessNumberRobot(x):
+    # Guess Number With Binary Search
     low = 0
     high = x
-    randomNumber = random.randint(1,x)
+    randomNumber = 1
     guess = 0
-
     print("Guessing Number: {}\n".format(randomNumber))
 
     while(guess != randomNumber):
-        guess = random.randint(low,high)
+        guess = low + (round((high-low)/2))
         print("Robot Guess: {}".format(guess))
         if(guess < randomNumber):
             print("Its Too Low")
@@ -34,8 +34,8 @@ def guessNumberRobot(x):
         elif(guess > randomNumber):
             print("Its Too High")
             high = guess-1
+        print(guess,high,low)
 
     print("Yeay Congrats, u deserve it!")
 
-
-guessNumberRobot(limitNumber)
+guessNumberRobot(100)
