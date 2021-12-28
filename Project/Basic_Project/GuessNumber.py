@@ -26,7 +26,7 @@ def guessNumberRobot(x):
     print("Guessing Number: {}\n".format(randomNumber))
 
     while(guess != randomNumber):
-        guess = low + (round((high-low)/2))
+        guess = (low + high)//2
         print("Robot Guess: {}".format(guess))
         if(guess < randomNumber):
             print("Its Too Low")
