@@ -10,15 +10,16 @@ class hero:
         self.__attack = attack
         hero.__jumlah += 1
 
-    # getter
+    # getter dengan method (kurang efisien)
     def getName(self):
         return self.__name
 
-    # contoh getter yang lebih simpel (bisa dirubah)
+    # decorator property berguna sebagai pengubah method sebagai variable
     @property
     def attack(self):
         pass
     
+    # decorator variable.getter berguna sebagai getter sebagai variable (bukan sebagai method)
     @attack.getter
     def attack(self):
         return self.__attack
@@ -29,7 +30,7 @@ class hero:
     def getJumlah2():
         return hero.__jumlah
 
-    # properti (menganggap method sebagai sebuah variable) / getter vers lain
+    # properti (menganggap method sebagai sebuah variable)
     @property
     def info(self):
         return "name : {} \nhealth : {}\nattack : {}".format(self.__name, self.__health, self.__attack) 

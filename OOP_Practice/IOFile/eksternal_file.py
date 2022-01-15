@@ -13,6 +13,7 @@ file1 = open("data.txt","w")
 file1.write("membuat ulang data pada file data.txt")
 file1.close() 
 
+
 # =============================Read_Mode=================================
 file2 = open("data.txt", "r")
 print(file2.read())
