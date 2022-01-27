@@ -31,3 +31,4 @@ while True:
     face = face_cascade.detectMultiScale(gray, scaleFactor = 1.1, minNeighbors = 5)
     for x,y,w,h in face:
         img = cv2.rectangle(frame, (x,y), (x+(w+20), y+(h-300)), (0,0,255),-1)
+        smile = smile_cascade.dete
