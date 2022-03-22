@@ -11,7 +11,7 @@ def matplotlibLines():
     outerPop = [3.213, 1.231, .3213, .012]
 
     # plt.plot memvisualkan grafik garis antara year (x) dan population(y) dengan garis yang tersambung
-    plt.plot(year, pop, cumulative = True)
+    plt.plot(pop)
 
     # sementara itu, plt.scatter akan memvisualisasi grafik seperti plot, hanya saja dengan garis terputus (hanya titik-titik)
     # plt.scatter(year, outerPop)
