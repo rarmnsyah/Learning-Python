@@ -1,8 +1,10 @@
 import os
-if not os.path.exists('C:/Users/LENOVO/Template Program/Python/Project/Basic_Project/Project CRUD/database.txt'):
-    file1 = open('C:/Users/LENOVO/Template Program/Python/Project/Basic_Project/Project CRUD/database.txt', 'w')
+dir_path = os.path.dirname(os.path.realpath(__file__))
+if not os.path.exists('{}/database.txt'.format(dir_path)):
+    file1 = open('{}/database.txt'.format(dir_path), 'w')
     file1.write('Admin,Risky Armansyah,Sungailiat,31 Oktober 2003')
     file1.close()
+
 from database import *
 # create
 def create():
@@ -19,7 +21,7 @@ def create():
     tanggal = tanggal.strip()
     tempat = tempat.strip()
 
-    file1= open('C:/Users/LENOVO/Template Program/Python/Project/Basic_Project/Project CRUD/database.txt', 'a')
+    file1= open('{}/database.txt'.format(dir_path), 'a')
     file1.write('\n{},{},{},{}'.format(username, nama, tempat, tanggal))
     file1.close()
     opsi()
