@@ -1,4 +1,4 @@
-import random,cv2,time
+import random, cv2,time
 
 face_cascade = cv2.CascadeClassifier("hardcascade_frontalface_default.xml")
 smile_cascade = cv2.CascadeClassifier("smile.xml")
