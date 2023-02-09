@@ -1,0 +1,7 @@
+{
+  "python.pythonPath": "C:\\Python311\\python.exe",
+
+  "python.terminal.activateEnvironment": true,
+
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe"
+}

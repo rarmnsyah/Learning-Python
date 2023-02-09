@@ -1,7 +1,7 @@
 import random, cv2,time
 
 face_cascade = cv2.CascadeClassifier("hardcascade_frontalface_default.xml")
-smile_cascade = cv2.CascadeClassifier("smile.xml")
+# smile_cascade = cv2.CascadeClassifier("smile.xml")
 video = cv2.VideoCapture(0)
 num = 0
 
@@ -31,4 +31,4 @@ while True:
     face = face_cascade.detectMultiScale(gray, scaleFactor = 1.1, minNeighbors = 5)
     for x,y,w,h in face:
         img = cv2.rectangle(frame, (x,y), (x+(w+20), y+(h-300)), (0,0,255),-1)
-        smile = smile_cascade.dete
+        # smile = smile_cascade.dete
