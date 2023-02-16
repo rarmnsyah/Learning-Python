@@ -17,11 +17,12 @@ def img_brighter(image, brighter):
     newImage = np.zeros([width, heigth, 3])
     for w in range(width-1):
         for h in range(heigth-1):
-            images_bit = image[w, h]
-            luma = 0.07*images_bit[0] + 0.72*images_bit[1] + 0.21*images_bit[2]
-            luma += brighter
-            brighter_bit = [0.07*luma, 0.72*luma, 0.21*luma]
+            images_bit = np.array(image[w, h])
+            # luma = 0.07*images_bit[0] + 0.72*images_bit[1] + 0.21*images_bit[2]
+            # luma += brighter
+            brighter_bit = images_bit + brighter
             newImage[w, h] = brighter_bit
+    # print(newImage)
 
     return newImage
 
@@ -32,7 +33,8 @@ def img_grayscale_converter(image):
     for w in range(width-1):
         for h in range(heigth-1):
             grayscale_bit = np.clip(
-                image[w, h][0]*0.07 + image[w, h][1]*0.72 + image[w, h][2]*0.21, 0, 255)
+                # image[w, h][0]*0.07 + image[w, h][1]*0.72 + image[w, h][2]*0.21, 0, 255)
+                image[w, h][0]*0.144 + image[w, h][1]*0.587 + image[w, h][2]*0.299, 0, 255)
             newImage[w, h] = grayscale_bit
     return newImage
 
@@ -63,7 +65,7 @@ def img_blackwhite_converter(image, threshold=128):
     return newImage
 
 
-newBrighterImage = img_brighter(m, 0)
+newBrighterImage = img_brighter(m, 5)
 newImageGrayscale = img_grayscale_converter(m)
 newImageNegative = img_negative_converter(newImageGrayscale)
 newImageBlackwhite = img_blackwhite_converter(newImageGrayscale)
