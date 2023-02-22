@@ -2,6 +2,9 @@ import os
 import numpy as np
 import matplotlib.image as img
 import cv2
+import time
+import matplotlib.pyplot as plt
+import pandas as pd
 
 path = os.path.dirname(os.path.realpath(__file__))
 img_url = 'instagram_icon-removebg-preview.png'
@@ -10,6 +13,14 @@ outputPath = os.path.join(path, 'output')
 
 # format cv2 adalah BGR bukan RGB
 m = cv2.imread(imgPath)
+
+def get_pixel(image):
+    imshape = image.shape
+    print(imshape[0], imshape[1])
+    for i in range(imshape[0]):
+        for j in range(imshape[1]):
+            print('pixel ({}, {}) : {}'.format(i, j, image[i,j]))
+            time.sleep(0.5)
 
 
 def img_brighter(image, brighter):
@@ -20,7 +31,7 @@ def img_brighter(image, brighter):
             images_bit = np.array(image[w, h])
             # luma = 0.07*images_bit[0] + 0.72*images_bit[1] + 0.21*images_bit[2]
             # luma += brighter
-            brighter_bit = images_bit + brighter
+            brighter_bit = np.clip(images_bit + brighter, 0, 255)
             newImage[w, h] = brighter_bit
     # print(newImage)
 
@@ -64,20 +75,51 @@ def img_blackwhite_converter(image, threshold=128):
             newImage[w, h] = bw_bit
     return newImage
 
+def img_histogram_gray_plt(image):
+    if (len(image.shape) == 3):
+        image = img_grayscale_converter(image)
 
-newBrighterImage = img_brighter(m, 5)
-newImageGrayscale = img_grayscale_converter(m)
-newImageNegative = img_negative_converter(newImageGrayscale)
-newImageBlackwhite = img_blackwhite_converter(newImageGrayscale)
+    hist_value = {}
+    # hist_value.key = image[0]
 
-# newImage = bright_updater(0.5, m)
-# print(newImage.shape, m.shape)
+    plt.hist(np.array(image).flatten(), bins = 255)
+    # print(np.array(image).flatten())
+    plt.show()
 
-cv2.imshow('oldimage', m)
-cv2.imshow('imgBrighter', newBrighterImage)
-cv2.imshow('imgGrayscale', newImageGrayscale)
-cv2.imshow('imgNegativeGrayscale', newImageNegative)
-cv2.imshow('imgBlackWhite', newImageBlackwhite)
+def img_histogram_gray_manual(image):
+    if (len(image.shape) == 3):
+        image = img_grayscale_converter(image)
+
+    hist_value = { i : 0 for i in range(256)}
+    # for i in range(image.shape[0]):
+    #     for j in range(image.shape[1]):
+    image = np.array(image).flatten()
+    for i in range(len(image)): 
+        hist_value[image[i]] += 1
+
+    # print(hist_value.keys(), hist_value.values())
+    plt.bar(hist_value.keys(), hist_value.values())
+    plt.show()
+
+    
+
+    
+
+img_histogram_gray_manual(m)
+# newImageGrayscale = img_grayscale_converter(m)
+# newBrighterImage = img_brighter(m, -50)
+# newImageNegative = img_negative_converter(newImageGrayscale)
+# newImageBlackwhite = img_blackwhite_converter(newImageGrayscale)
+img_histogram_gray_plt(m)
+# get_pixel(m)
+
+
+
+# cv2.imshow('oldimage', m)
+# cv2.imshow('imgBrighter', newBrighterImage)
+# cv2.imshow('imgGrayscale', newImageGrayscale)
+# cv2.imshow('imgNegativeGrayscale', newImageNegative)
+# cv2.imshow('imgBlackWhite', newImageBlackwhite)
+# cv2.waitKey(0)
 # cv2.imshow('newimage', newImage)
-cv2.waitKey(0)
 # # img.imsave(os.path.join(outputPath, 'newImage.png'), newImage)
