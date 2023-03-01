@@ -103,6 +103,8 @@ def img_histogram_gray_manual(image):
     for i in range(len(image)):
         hist_value[image[i]] += 1
 
+    # hist_value = pd.DataFrame(image).groupby()
+
     # print(hist_value.keys(), hist_value.values())
     plt.bar(hist_value.keys(), hist_value.values())
     plt.show()
@@ -123,7 +125,7 @@ def img_freq_hist(image):
     plt.bar(freq_hist.keys(), freq_hist.values())
     plt.show()
 
-
+cv2.imshow('gambar', m)
 # img_histogram_gray_manual(m)
 # newImageGrayscale = img_grayscale_converter(m)
 # newBrighterImage = img_brighter(m, -50)

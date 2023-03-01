@@ -8,11 +8,11 @@ import os
 from numpy.lib.function_base import iterable
 
 
-cwd = os.getcwd()
-res_path = os.path.join(cwd, 'Image Processing', 'OpenCV', 'Resources')
+path = os.path.dirname(os.path.realpath(__file__))
+# res_path = os.path.join(path, 'Image Processing', 'OpenCV', 'Resources')
 
-path = os.path.join(res_path, 'instagram_icon-removebg-preview.png')
-img = cv2.imread(path)
+img_path = os.path.join(path, 'Resources', 'instagram_icon-removebg-preview.png')
+img = cv2.imread(img_path)
 
 print(path)
 
