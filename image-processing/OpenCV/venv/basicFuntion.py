@@ -49,6 +49,8 @@ def main():
     cv2.imshow('canIMG100200', cannyImg)
     cv2.imshow('canIMG11', cannyImg2)
 
+    cv2.GaussianBlur
+
     '''
     4. Fungsi dilate untuk increase tight of line dari canny img
         cv2.dilate(object, kernel, iterations)

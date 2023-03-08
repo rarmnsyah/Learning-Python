@@ -128,7 +128,7 @@ def img_freq_hist(image):
 def Canny_detector(img, weak_th = None, strong_th = None):
       
     # conversion of image to grayscale
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img = img_grayscale_converter(img)
        
     # Noise reduction step
     img = cv2.GaussianBlur(img, (5, 5), 1.4)
