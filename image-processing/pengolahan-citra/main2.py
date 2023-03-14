@@ -2,7 +2,9 @@ import numpy as np
 import pandas as pd
 import cv2
 from main import *
+import itertools
 
+# canny edge detector
 def Canny_detector(img, weak_th = None, strong_th = None):
       
     # conversion of image to grayscale
@@ -27,7 +29,7 @@ def Canny_detector(img, weak_th = None, strong_th = None):
     # getting the dimensions of the input image  
     height, width = img.shape
        
-    # Loonp.ping through every np.pixel of the grayscale 
+    # Looping through every pixel of the grayscale 
     # image
     for i_x in range(width):
         for i_y in range(height):
@@ -35,7 +37,7 @@ def Canny_detector(img, weak_th = None, strong_th = None):
             grad_ang = ang[i_y, i_x]
             grad_ang = abs(grad_ang-180) if abs(grad_ang)>180 else abs(grad_ang)
                
-            # selecting the neighbours of the target np.pixel
+            # selecting the neighbours of the target pixel
             # according to the gradient direction
             # In the x axis direction
             if grad_ang<= 22.5:
@@ -94,22 +96,24 @@ def Canny_detector(img, weak_th = None, strong_th = None):
     # gradients of edges
     return mag
 
+# gaussian kernel maker
 def gen_gaussian_kernel(k_size, sigma):
     center = k_size // 2
     x, y = np.mgrid[0 - center : k_size - center, 0 - center : k_size - center]
     g = 1 / (2 * np.pi * sigma) * np.exp(-(np.square(x) + np.square(y)) / (2 * np.square(sigma)))
-    return g, (x,y)
+    return g
 
+# gaussian filter / image blurred by gaussian
 def gaussian_filter(image, k_size, sigma):
     height, width = image.shape[0], image.shape[1]
     # dst image height and width
     dst_height = height - k_size + 1
     dst_width = width - k_size + 1
 
-    # im2col, turn the k_size*k_size np.pixels into a row and np.vstack all rows
+    # im2col, turn the k_size*k_size pixels into a row and np.vstack all rows
     image_array = np.zeros((dst_height * dst_width, k_size * k_size))
     row = 0
-    for i, j in np.product(range(dst_height), range(dst_width)):
+    for i, j in itertools.product(range(dst_height), range(dst_width)):
         window = np.ravel(image[i : i + k_size, j : j + k_size])
         image_array[row, :] = window
         row += 1
@@ -123,6 +127,18 @@ def gaussian_filter(image, k_size, sigma):
 
     return dst
 
+# sobel
+sobel_images = cv2.Sobel(images[1], cv2.CV_64F,1,0,ksize=5)
 
-print(gen_gaussian_kernel(3, 1))
+# canny
+can_images = cv2.Canny(images[1], 1, 255)
+
+# print(gen_gaussian_kernel(3, 1))
 # print(gen_gaussian_kernel(3, .98))
+can_images2 = Canny_detector(images[1])
+cv2.imshow('canny images', can_images)
+cv2.imshow('canny images2', can_images2)
+cv2.imshow('sobel images', sobel_images)
+bluredImage = gaussian_filter(img_grayscale_converter(images[1]), 5, .9)
+cv2.imshow('gaussian blured images' , bluredImage)
+cv2.waitKey(0);
