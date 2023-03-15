@@ -192,12 +192,12 @@ def image_dilated(img, x, y):
     return newimg
 
 def image_rotated(img):
-    height, width, _ = img.shape
-    newimg = np.zeros((width, height, 3), np.uint8)
-    for w in range(width):
-        k = height-1
-        for h in range(height):
-            newimg[w, h] = img[k, w]
+    width, heigth = img.shape[:2]
+    newimg = np.zeros((width, heigth, 3), np.uint8)
+    for w in range(width - 1):
+        k = heigth-1
+        for h in range(heigth - 1):
+            newimg[k, w] = img[h, w]
             k -= 1
     return newimg
 
@@ -218,14 +218,13 @@ def image_zoomed(img, scale):
 
 
 newImage = []
-# get_pixel(images[1])
 # newImageGrayscale = img_grayscale_converter(m)
 # newBrighterImage = img_brighter(m, -10)
 # newNotImage = boolean_operator_not(m)
 # newAndImage = boolean_operator_and(m, m)
 # newAritmeticImage = image_aritmatika_operations(m, m, '-')
-newDilatedImage = image_dilated(images[0], 30, 25)
-newRotatedImage = image_rotated(images[1])
+newDilatedImage = image_dilated(images[1], 30, 25)
+newRotatedImage = image_rotated(images[0])
 newZoomedImage = image_zoomed(images[1], 2)
 
 # cv2.imshow('gambar', images[1])
