@@ -7,11 +7,12 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 path = os.path.dirname(os.path.realpath(__file__))
-path = os.path.join(path, 'resources')
+path = os.path.join(path, 'Resources')
 images = []
 
 # format cv2 adalah BGR bukan RGB
 for filename in os.listdir(path):
+    print(filename)
     images.append(cv2.imread(os.path.join(path, filename)))
 
 for i, image in enumerate(images):
@@ -130,8 +131,9 @@ def img_freq_hist(image):
     plt.show()
 
 def image_aritmatika_operations(img1, img2, operator):
+    if (img1.shape != img2.shape) :raise TypeError;
     # operator = (+, -, *)
-    print(img1.shape)
+    # print(img1.shape)
     width, heigth = img1.shape[:2]
     # newImage = np.zeros([width, heigth, 3], dtype = np.uint8)
     for w in range(width - 1):
@@ -216,25 +218,28 @@ def image_zoomed(img, scale):
         n = 0
     return newimg
 
+# operations = 
+
 
 newImage = []
-# newImageGrayscale = img_grayscale_converter(m)
-# newBrighterImage = img_brighter(m, -10)
-# newNotImage = boolean_operator_not(m)
-# newAndImage = boolean_operator_and(m, m)
-# newAritmeticImage = image_aritmatika_operations(m, m, '-')
-newDilatedImage = image_dilated(images[1], 30, 25)
-newRotatedImage = image_rotated(images[0])
-newZoomedImage = image_zoomed(images[1], 2)
+newImageGrayscale = img_grayscale_converter(images[1])
+newBrighterImage = img_brighter(images[2], -10)
+newNotImage = boolean_operator_not(images[4])
+newAndImage = boolean_operator_and(images[8], images[1])
+newAritmeticImage = image_aritmatika_operations(images[3], images[4], '+')
+newDilatedImage = image_dilated(images[2], 25, 35)
+newRotatedImage = image_rotated(images[9])
+newZoomedImage = image_zoomed(images[7], 2)
 
 # cv2.imshow('gambar', images[1])
-# cv2.imshow('gambar1', newBrighterImage)
-# cv2.imshow('gambar2', newNotImage)
-# cv2.imshow('gambar3', newAndImage)
-# cv2.imshow('gambar4', newAritmeticImage)
-cv2.imshow('gambar5', newDilatedImage)
-cv2.imshow('gambar6', newRotatedImage)
-cv2.imshow('gambar7', newZoomedImage)
+cv2.imshow('grayscale', newImageGrayscale)
+cv2.imshow('brigther', newBrighterImage)
+cv2.imshow('not', newNotImage)
+cv2.imshow('and', newAndImage)
+cv2.imshow('aritmetic', newAritmeticImage)
+cv2.imshow('dilated', newDilatedImage)
+cv2.imshow('rotated', newRotatedImage)
+cv2.imshow('zoomed', newZoomedImage)
 
 # newImageNegative = img_negative_converter(newImageGrayscale)
 # newImageBlackwhite = img_blackwhite_converter(newImageGrayscale)
