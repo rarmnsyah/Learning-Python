@@ -1,15 +1,29 @@
-class Solution:
-    def matrixSum(self, nums) -> int:
-        tempScore = [max(j.pop(j.index(max(j))) for j in nums) for _ in range(len(nums[0]))]
-        # print([max(j.pop(j.index(max(j))) for j in nums) for _ in range(len(nums[0]))])
-        print(tempScore)
-        return sum(tempScore)
+def yoimiya_dan_bioskop(bioskops, viewers, capacity):
+    bioskops.sort()
+    viewers.sort()
     
-m, n = map(int, input().split())
-val = []
-for i in range(m):
-    val.append(list(map(int, input().split())))
+    view_id = 0 
 
-solusi = Solution()
-print(solusi.matrixSum(val))
-# print(solusi.matrixSum([[86, 46], [88, 5], [57, 71]]))
+    for bioskop in bioskops:
+        maxed_bioskop = False
+        cap = capacity
+
+        while view_id < len(viewers) and viewers[view_id] <= bioskop and cap:
+            cap -= 1
+            view_id += 1
+
+        if cap == 0: 
+            maxed_bioskop = True
+
+    if maxed_bioskop:
+        ans = viewers[view_id-1]
+    else:
+        ans = bioskops[-1]
+
+    booked = set(viewers)
+    for i in range(ans, 0, -1):
+        if i not in booked:
+            return i
+
+
+print(yoimiya_dan_bioskop([20,30,10], [19,13,26,4,25,11,21], 2))

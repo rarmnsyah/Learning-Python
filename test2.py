@@ -1,30 +1,26 @@
-def calculate_score(m, n, matrix):
-    score = 0
-    
-    for _ in range(n):
-        max_val = 0
-        max_index = None
-        
-        # Cari nilai maksimum pada setiap matriks m
-        for i in range(m):
-            if matrix[i] > max_val:
-                max_val = matrix[i]
-                max_index = i
-        
-        # Tambahkan nilai maksimum ke skor
-        score += max_val
-        
-        # Hapus nilai maksimum dari matriks m
-        matrix[max_index] = 0
-    
-    return score
+def tanaman_xiao(M, N, R, P, lahan):
+    tanaman = []
+    sumber_racun = []
+    ans = []
+    for i in range(M):
+        for j in range(N):
+            if lahan[i][j] == 1:
+                tanaman.append([i, j])
+            elif lahan[i][j] == 2:
+                sumber_racun.append([i, j])
+    for tanam in tanaman:
+        n_racun = 0
+        for racun in sumber_racun:
+            if abs(tanam[0]-racun[0]) <= R and abs(tanam[1]-racun[1]) <= R:
+                n_racun += 1
+        print(tanam, n_racun)
+        if n_racun <= P:
+            ans.append(tanam)
+    return ans
 
-# Input dari pengguna
-m, n = map(int, input().split())
-matrix = list(map(int, input().split()))
+M, N, R, P = list(map(int, input().split()))
+lahan = []
+for _ in range(M):
+    lahan.append(list(map(int, input().split())))
 
-# Panggil fungsi untuk menghitung skor
-score = calculate_score(m, n, matrix)
-
-# Output skor
-print(score)
+print(tanaman_xiao(M, N, R, P, lahan))
