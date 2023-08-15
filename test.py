@@ -25,5 +25,8 @@ def yoimiya_dan_bioskop(bioskops, viewers, capacity):
         if i not in booked:
             return i
 
+s, l, capacity = list(map(int, input().split()))
+bioskops = list(map(int, input().split()))
+viewers = list(map(int, input().split()))
 
-print(yoimiya_dan_bioskop([20,30,10], [19,13,26,4,25,11,21], 2))
+print(yoimiya_dan_bioskop(bioskops, viewers, capacity))
