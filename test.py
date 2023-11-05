@@ -3,6 +3,7 @@ def yoimiya_dan_bioskop(bioskops, viewers, capacity):
     viewers.sort()
     
     view_id = 0 
+    print(len(bioskops), len(viewers))
 
     for bioskop in bioskops:
         maxed_bioskop = False
