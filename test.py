@@ -1,33 +1,24 @@
-def yoimiya_dan_bioskop(bioskops, viewers, capacity):
-    bioskops.sort()
-    viewers.sort()
-    
-    view_id = 0 
-    print(len(bioskops), len(viewers))
+class Solution:
+    def strtoint(self, str_):
+        n = len(str_) - 1
+        num = 0
+        for i in str_:
+            num += (ord(i) - ord('0')) * 10**n
+            n -= 1
+        return num
+        
+    def multiply(self, num1: str, num2: str) -> str:
+        num1_ = self.strtoint(num1)
+        num2_ = self.strtoint(num2)
 
-    for bioskop in bioskops:
-        maxed_bioskop = False
-        cap = capacity
+        res = num1_ * num2_
+        
+        ans = ''
+        while(res):
+            ans += chr(ord('0') + int(res % 10))
+            res //= 10
 
-        while view_id < len(viewers) and viewers[view_id] <= bioskop and cap:
-            cap -= 1
-            view_id += 1
-
-        if cap == 0: 
-            maxed_bioskop = True
-
-    if maxed_bioskop:
-        ans = viewers[view_id-1]
-    else:
-        ans = bioskops[-1]
-
-    booked = set(viewers)
-    for i in range(ans, 0, -1):
-        if i not in booked:
-            return i
-
-s, l, capacity = list(map(int, input().split()))
-bioskops = list(map(int, input().split()))
-viewers = list(map(int, input().split()))
-
-print(yoimiya_dan_bioskop(bioskops, viewers, capacity))
+        return ans[::-1]
+solution = Solution().multiply('0', '1')
+print(solution)
+        
